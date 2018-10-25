@@ -1,5 +1,7 @@
 package com.ardier16.noteskeeper.ui;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -57,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     ListView notesList;
 
     NoteAdapter noteAdapter;
+    AlertDialog deleteDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -189,11 +193,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case CM_DELETE_ID:
-                Note note = notesFiltered.get(acmi.position);
-                notesFiltered.remove(note);
-                notes.remove(note);
-                db.deleteNote(note.getId());
-                noteAdapter.notifyDataSetChanged();
+                showDeleteDialog(acmi.position);
                 return true;
             case CM_EDIT_ID:
                 editedNoteIndex = acmi.position;
@@ -202,6 +202,36 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onContextItemSelected(item);
+    }
+
+    private void showDeleteDialog(int notePosition) {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(MainActivity.this);
+        dialogBuilder.setTitle(R.string.delete_title);
+        dialogBuilder.setMessage(R.string.delete_message);
+        dialogBuilder.setCancelable(true);
+
+        dialogBuilder.setPositiveButton(
+                R.string.yes,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Note note = notesFiltered.get(notePosition);
+                        notesFiltered.remove(note);
+                        notes.remove(note);
+                        db.deleteNote(note.getId());
+                        noteAdapter.notifyDataSetChanged();
+                    }
+                });
+
+        dialogBuilder.setNegativeButton(
+                R.string.no,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        deleteDialog = dialogBuilder.create();
+        deleteDialog.show();
     }
 
     @Override

@@ -28,4 +28,8 @@
     <string name="delete">Видалити</string>
     <string name="note">Нотатка #</string>
     <string name="some_description">Деякий опис нотатки</string>
+    <string name="delete_title">Видалення нотатки</string>
+    <string name="delete_message">Ви дійсно хочете видалити нотатку?</string>
+    <string name="yes">Так</string>
+    <string name="no">Ні</string>
 </resources>

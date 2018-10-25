@@ -28,4 +28,8 @@
     <string name="delete">Delete</string>
     <string name="note">Note #</string>
     <string name="some_description">Some description</string>
+    <string name="delete_title">Delete Note</string>
+    <string name="delete_message">Are you sure to delete this note?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>
