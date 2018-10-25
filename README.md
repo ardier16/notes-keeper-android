@@ -1,2 +1,3 @@
-# notes-keeper-android
+# Notes Keeper
+
 Android app for keeping your notes
