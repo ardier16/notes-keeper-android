@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Notes Keeper</string>
+    <string name="add_note">Додати нотатку</string>
+    <string name="note_title">ШШШШШШШШШШШШШШШШ</string>
+    <string name="priotity">★★☆</string>
+    <string name="title">Заголовок</string>
+    <string name="description">Опис</string>
+    <string name="priority">Важливість</string>
+    <string name="star">☆</string>
+    <string name="no_image">Зображення не вибрано</string>
+    <string name="choose_gallery">Вибрати з галереї</string>
+    <string name="full_star">★</string>
+    <string name="save_changes">Зберегти</string>
+    <string name="date_example">24/10/2018 20:18</string>
+    <string name="search_text">Пошук нотаток</string>
+    <string name="sort_by_title">Сортувати за назвою</string>
+    <string name="sort_by_priority">Сортувати за важливістю</string>
+    <string name="one_star">★☆☆</string>
+    <string name="two_stars">★★☆</string>
+    <string name="three_stars">★★★</string>
+    <string name="note_details">Деталі нотатки</string>
+    <string name="note_image">Зображення нотатки</string>
+    <string name="date_format">dd.MM.yyyy kk:mm:ss</string>
+    <string name="edit_note">Редагувати нотатку</string>
+    <string name="select_image">Вибрати зображення</string>
+    <string name="empty_title_error">Будь ласка, додайте заголовок!</string>
+    <string name="edit">Редагувати</string>
+    <string name="delete">Видалити</string>
+    <string name="note">Нотатка #</string>
+    <string name="some_description">Деякий опис нотатки</string>
+</resources>

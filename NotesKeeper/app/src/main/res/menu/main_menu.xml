@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:icon="@android:drawable/ic_input_add"
+        android:id="@+id/addItem"
+        android:title="@string/add_note"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom" />
+    <item
+        android:icon="@android:drawable/ic_menu_sort_by_size"
+        android:id="@+id/sortItem"
+        android:title="@string/sort_by_title"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom">
+        <menu>
+            <item
+                android:id="@+id/sortByTitleItem"
+                android:title="@string/sort_by_title" />
+            <item
+                android:id="@+id/sortByPriorityItem"
+                android:title="@string/sort_by_priority" />
+        </menu>
+    </item>
+
+    <item
+        android:icon="@android:drawable/btn_star"
+        android:id="@+id/filterItem"
+        android:title="@string/sort_by_priority"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom">
+        <menu>
+            <item
+                android:id="@+id/lowPriorityFilter"
+                android:title="@string/one_star"
+                android:checkable="true"
+                android:checked="true"/>
+            <item
+                android:id="@+id/mediumPriorityFilter"
+                android:title="@string/two_stars"
+                android:checkable="true"
+                android:checked="true"/>
+            <item
+                android:id="@+id/highPriorityFilter"
+                android:title="@string/three_stars"
+                android:checkable="true"
+                android:checked="true"/>
+        </menu>
+    </item>
+</menu>

@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Notes Keeper</string>
+    <string name="add_note">Add a Note</string>
+    <string name="note_title">WWWWWWWWWWWWWWWWWWWW</string>
+    <string name="priotity">★★☆</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="priority">Priority</string>
+    <string name="star">☆</string>
+    <string name="no_image">No image chosen</string>
+    <string name="choose_gallery">Choose from gallery</string>
+    <string name="full_star">★</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="date_example">24/10/2018 20:18</string>
+    <string name="search_text">Search for notes</string>
+    <string name="sort_by_title">Sort By Title</string>
+    <string name="sort_by_priority">Sort By Priority</string>
+    <string name="one_star">★☆☆</string>
+    <string name="two_stars">★★☆</string>
+    <string name="three_stars">★★★</string>
+    <string name="note_details">Note Details</string>
+    <string name="note_image">Note Image</string>
+    <string name="date_format">MM/dd/yyyy hh:mm:ss a</string>
+    <string name="edit_note">Note Edit</string>
+    <string name="select_image">Select Image</string>
+    <string name="empty_title_error">Please, add the title!</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="note">Note #</string>
+    <string name="some_description">Some description</string>
+</resources>
