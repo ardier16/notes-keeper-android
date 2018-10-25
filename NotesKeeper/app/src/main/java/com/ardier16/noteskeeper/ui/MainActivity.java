@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.ardier16.noteskeeper.SQLite.DBAssistant;
 import com.ardier16.noteskeeper.notes.Note;
 import com.ardier16.noteskeeper.adapters.NoteAdapter;
 import com.ardier16.noteskeeper.notes.NotesListHelper;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static ArrayList<Note> notes = new ArrayList<>();
     private static ArrayList<Note> notesFiltered;
+    private DBAssistant db;
 
     MenuItem lowPriorityItem;
     MenuItem mediumPriorityItem;
@@ -61,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        db = new DBAssistant(this);
+
         setNotesList();
         setSearchField();
         registerForContextMenu(notesList);
@@ -70,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         // Uncomment if you need some data to debug
         //NotesListHelper.fillData(notes, 100, this);
 
+        notes = db.getNotes();
         notesFiltered = new ArrayList<>(notes);
 
         noteAdapter = new NoteAdapter(this, notesFiltered);
@@ -187,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
                 Note note = notesFiltered.get(acmi.position);
                 notesFiltered.remove(note);
                 notes.remove(note);
+                db.deleteNote(note.getId());
                 noteAdapter.notifyDataSetChanged();
                 return true;
             case CM_EDIT_ID:
@@ -202,7 +208,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
+        notes = db.getNotes();
         notesFiltered = new ArrayList<>(notes);
+
+        db.close();
     }
 
 
@@ -229,7 +238,8 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == ADD_NOTE && data != null) {
-            notes.add(convertResultDataToNote(data));
+            db.addNote(convertResultDataToNote(data));
+            notes = db.getNotes();
         } else if (requestCode == EDIT_NOTE && data != null) {
             replaceNoteDataFromIntent(data);
         }
@@ -262,6 +272,8 @@ public class MainActivity extends AppCompatActivity {
         if (imagePath != null) {
             note.setImagePath(imagePath);
         }
+
+        db.updateNote(note.getId(), note);
     }
 
     private void refreshActivity() {

@@ -11,12 +11,18 @@ public class Note {
     private String imagePath;
 
     public Note(String title, String description,
-                NotePriority priority, String imageUri) {
+                NotePriority priority, String imagePath) {
         this.title = title;
         this.description = description;
         this.priority = priority;
         this.dateCreated = new Date();
-        this.imagePath = imageUri;
+        this.imagePath = imagePath;
+    }
+
+    public Note(int id, String title, String description,
+                NotePriority priority, String imagePath) {
+        this(title, description, priority, imagePath);
+        this.id = id;
     }
 
     public int getId() {
