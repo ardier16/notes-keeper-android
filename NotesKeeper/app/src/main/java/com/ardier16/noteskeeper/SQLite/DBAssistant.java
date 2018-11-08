@@ -9,6 +9,7 @@ import com.ardier16.noteskeeper.notes.Note;
 import com.ardier16.noteskeeper.notes.NotePriority;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DBAssistant {
     private NotesDBHelper dbHelper;
@@ -48,6 +49,7 @@ public class DBAssistant {
             int descIndex = cursor.getColumnIndex(NotesDBHelper.KEY_DESCRIPTION);
             int priorityIndex = cursor.getColumnIndex(NotesDBHelper.KEY_PRIORITY);
             int imagePathIndex = cursor.getColumnIndex(NotesDBHelper.KEY_IMAGE_PATH);
+            int dateCreatedIndex = cursor.getColumnIndex(NotesDBHelper.KEY_CREATED);
 
             do {
                 Note note = new Note(
@@ -55,7 +57,8 @@ public class DBAssistant {
                         cursor.getString(titleIndex),
                         cursor.getString(descIndex),
                         NotePriority.valueOf(cursor.getString(priorityIndex)),
-                        cursor.getString(imagePathIndex)
+                        cursor.getString(imagePathIndex),
+                        new Date(cursor.getString(dateCreatedIndex))
                 );
 
                 notes.add(note);
@@ -76,5 +79,6 @@ public class DBAssistant {
         values.put(NotesDBHelper.KEY_DESCRIPTION, note.getDescription());
         values.put(NotesDBHelper.KEY_PRIORITY, note.getPriority().name());
         values.put(NotesDBHelper.KEY_IMAGE_PATH, note.getImagePath());
+        values.put(NotesDBHelper.KEY_CREATED, note.getDateCreated().toString());
     }
 }

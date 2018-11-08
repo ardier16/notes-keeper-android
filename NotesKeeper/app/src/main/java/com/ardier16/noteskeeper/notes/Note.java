@@ -20,9 +20,10 @@ public class Note {
     }
 
     public Note(int id, String title, String description,
-                NotePriority priority, String imagePath) {
+                NotePriority priority, String imagePath, Date dateCreated) {
         this(title, description, priority, imagePath);
         this.id = id;
+        this.dateCreated = dateCreated;
     }
 
     public int getId() {

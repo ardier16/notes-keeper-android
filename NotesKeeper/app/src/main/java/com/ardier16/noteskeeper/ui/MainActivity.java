@@ -23,11 +23,9 @@ import com.ardier16.noteskeeper.adapters.NoteAdapter;
 import com.ardier16.noteskeeper.notes.NotesListHelper;
 import com.ardier16.noteskeeper.notes.NotePriority;
 import com.ardier16.noteskeeper.R;
-import com.ardier16.noteskeeper.comparators.NoteTitleComparator;
-import com.ardier16.noteskeeper.comparators.NotePriorityComparator;
+import com.ardier16.noteskeeper.notes.SortType;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,8 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int ADD_NOTE = 1;
     private static final int EDIT_NOTE = 2;
 
-    private boolean sortedByTitleAsc = false;
-    private boolean sortedByPriorityAsc = false;
+    private static SortType sortType = SortType.NONE;
 
     private int editedNoteIndex = 0;
 
@@ -155,10 +152,12 @@ public class MainActivity extends AppCompatActivity {
                 addNote(null);
                 break;
             case R.id.sortByTitleItem:
-                sortNotesByTitle();
+                sortType = sortType == SortType.SORT_BY_TITLE_ASC ?
+                        SortType.SORT_BY_TITLE_DESC : SortType.SORT_BY_TITLE_ASC;
                 break;
             case R.id.sortByPriorityItem:
-                sortNotesByPriority();
+                sortType = sortType == SortType.SORT_BY_PRIORITY_ASC ?
+                        SortType.SORT_BY_PRIORITY_DESC : SortType.SORT_BY_PRIORITY_ASC;
                 break;
             case R.id.lowPriorityFilter:
                 lowPriorityChecked = !lowPriorityChecked;
@@ -313,36 +312,10 @@ public class MainActivity extends AppCompatActivity {
         mediumPriorityItem.setChecked(true);
         highPriorityItem.setChecked(true);
 
-        sortedByTitleAsc = false;
-        sortedByPriorityAsc = false;
+        sortType = SortType.NONE;
 
         notesFiltered = new ArrayList<>(notes);
         noteAdapter.refresh(notesFiltered);
-    }
-
-
-    private void sortNotesByTitle() {
-        if (!sortedByTitleAsc) {
-            Collections.sort(notesFiltered, new NoteTitleComparator());
-            sortedByTitleAsc = true;
-        } else {
-            Collections.reverse(notesFiltered);
-            sortedByTitleAsc = false;
-        }
-
-        noteAdapter.notifyDataSetChanged();
-    }
-
-    private void sortNotesByPriority() {
-        if (!sortedByPriorityAsc) {
-            Collections.sort(notesFiltered, new NotePriorityComparator());
-            sortedByPriorityAsc = true;
-        } else {
-            Collections.reverse(notesFiltered);
-            sortedByPriorityAsc = false;
-        }
-
-        noteAdapter.notifyDataSetChanged();
     }
 
     private void filterNotes() {
@@ -355,6 +328,7 @@ public class MainActivity extends AppCompatActivity {
             notesFiltered = NotesListHelper.filterNotesByPriorities(notesFiltered, lowPriority,
                     mediumPriority, highPriority);
 
+            NotesListHelper.sortNotes(notesFiltered, sortType);
             noteAdapter.refresh(notesFiltered);
         }
     }

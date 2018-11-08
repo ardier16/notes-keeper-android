@@ -3,8 +3,11 @@ package com.ardier16.noteskeeper.notes;
 import android.content.Context;
 
 import com.ardier16.noteskeeper.R;
+import com.ardier16.noteskeeper.comparators.NotePriorityComparator;
+import com.ardier16.noteskeeper.comparators.NoteTitleComparator;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class NotesListHelper {
     private static final NotePriority[] priorities = new NotePriority[]{
@@ -66,6 +69,41 @@ public class NotesListHelper {
                 notes.add(new Note(ctx.getString(R.string.note) + i,
                         ctx.getString(R.string.some_description), priorities[i % 10], null));
             }
+        }
+    }
+
+    private static void sortNotesByTitle(ArrayList<Note> notes, boolean sortByTitleAsc) {
+        Collections.sort(notes, new NoteTitleComparator());
+
+        if (!sortByTitleAsc) {
+            Collections.reverse(notes);
+        }
+    }
+
+    private static void sortNotesByPriority(ArrayList<Note> notes, boolean sortByPriorityAsc) {
+        Collections.sort(notes, new NotePriorityComparator());
+
+        if (!sortByPriorityAsc) {
+            Collections.reverse(notes);
+        }
+    }
+
+    public static void sortNotes(ArrayList<Note> notes, SortType sortType) {
+        switch (sortType) {
+            case SORT_BY_TITLE_ASC:
+                sortNotesByTitle(notes, true);
+                return;
+            case SORT_BY_TITLE_DESC:
+                sortNotesByTitle(notes, false);
+                return;
+            case SORT_BY_PRIORITY_ASC:
+                sortNotesByPriority(notes, true);
+                return;
+            case SORT_BY_PRIORITY_DESC:
+                sortNotesByPriority(notes, false);
+                return;
+            case NONE:
+            default:
         }
     }
 }
