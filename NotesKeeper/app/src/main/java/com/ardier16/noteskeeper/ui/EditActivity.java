@@ -40,7 +40,7 @@ public class EditActivity extends AppCompatActivity {
     TextView mediumPriority;
     TextView highPriority;
 
-    private int READ_EXTERNAL_STORAGE_PERMISSION;
+    private int READ_EXTERNAL_STORAGE_PERMISSION = 1;
 
     Button saveBtn;
 
